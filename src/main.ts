@@ -4,6 +4,9 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import * as path from 'path';
 import * as express from 'express';
 
+
+const port = process.env.PORT || 1337
+
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
@@ -14,7 +17,8 @@ async function bootstrap() {
   app.setViewEngine('ejs');
   app.setBaseViewsDir(path.join(__dirname, '..', 'views'));
 
-  await app.listen(3000);
+  console.log('started on port', port)
+  await app.listen(port);
 }
 
 bootstrap();

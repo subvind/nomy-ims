@@ -10,20 +10,21 @@ export class AppController {
   getIndex() {
     // You can add some data here if needed
     return {
-      title: 'enigma machine'
+      title: 'instant messenger'
+    };
+  }
+
+  @Get('instant-messenger')
+  @Render('instant-messenger')
+  getInstantMessenger() {
+    return {
+      title: 'instant messenger'
     };
   }
 
   @Get('message')
   @Render('message')
   getMessage() {
-    return {};
-  }
-
-
-  @Get('rotors')
-  @Render('rotors')
-  getRotors() {
     return {};
   }
 
@@ -37,6 +38,13 @@ export class AppController {
 
     // Send the response back
     res.send(response);
+  }
+
+
+  @Get('button')
+  @Render('button')
+  getButton() {
+    return { layout: false };
   }
 
   // @Get()
