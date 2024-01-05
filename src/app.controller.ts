@@ -10,7 +10,7 @@ export class AppController {
   getIndex() {
     // You can add some data here if needed
     return {
-      title: 'instant messenger'
+      title: 'Instant Messenger Software - nomy.IMS'
     };
   }
 
@@ -18,7 +18,7 @@ export class AppController {
   @Render('instant-messenger')
   getInstantMessenger() {
     return {
-      title: 'instant messenger'
+      title: 'Instant Messenger - nomy.IMS'
     };
   }
 
