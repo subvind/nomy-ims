@@ -1,0 +1,45 @@
+<div class="card">
+  <span class="title">New Channel</span>
+  <br />
+  <div class="row">
+    <div class="col s12 m6">
+      <form hx-post="/broadcast" hx-target="#new-channel-result" hx-swap="innerHTML" hx-trigger="submit">
+        <p style="margin: 0;">channel:</p>
+        <input type="text" name="channel" placeholder="bravo" required>
+        <br />
+        <br />
+        <p style="margin: 0;">rotor settings:</p>
+        <textarea class="materialize-textarea" placeholder="['F.12', 'A.1', 'C.33', 'Z.99']" required></textarea>
+        <br />
+        <button type="submit" class="btn">Submit</button>
+      </form>
+      <br class="hide-on-med-and-up" />
+    </div>
+    <div class="col s12 m6">
+      <div class="result" id="new-channel-result">
+        Result will be displayed here
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .result {
+    border: 5px dashed #eee;
+    padding: 1em;
+  }
+  .title {
+    border: 1px solid #000;
+    font-size: 1.5em;
+    position: absolute; 
+    top: -0.8em; 
+    left: 1em; 
+    background-color: #aaa;
+    padding: 0 0.5em;
+  }
+  .card {
+    border: 1px solid #000;
+    position: relative;
+    background: #fff;
+  }
+</style>

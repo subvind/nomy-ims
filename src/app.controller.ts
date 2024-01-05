@@ -47,6 +47,24 @@ export class AppController {
     return { layout: false };
   }
 
+  @Get('sessions')
+  @Render('sessions/index')
+  getSessions() {
+    return { layout: false };
+  }
+
+  @Get('channels')
+  @Render('channels/index')
+  getChannels() {
+    return { layout: false };
+  }
+
+  @Get('messages')
+  @Render('messages/index')
+  getMessages() {
+    return { layout: false };
+  }
+
   // @Get()
   // getHello(): string {
   //   return this.appService.getHello();
