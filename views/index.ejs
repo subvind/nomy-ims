@@ -23,7 +23,7 @@
   </style>
 </head>
 <body>
-  <%- include('header'); -%>
+  <%- include('header'); %>
   
   <div style="text-align: center;">
     <button hx-get="/sessions" hx-target="#main-result" hx-swap="innerHTML" class="btn black"><i class="material-icons left">person</i>sessions</button>
@@ -33,16 +33,16 @@
   <br />
   <br />
   <div id="main-result" class="container">
-    <%- include('marketing'); -%>
+    <%- include('marketing'); %>
   </div>
 
   <br />
   <br />
   <br />
 
-  <%- include('button'); -%>
+  <%- include('button'); %>
   
-  <%- include('footer'); -%>
+  <%- include('footer'); %>
 
   <!-- Include htmx -->
   <script src="https://unpkg.com/htmx.org@1.7.0/dist/htmx.js"></script>

@@ -15,6 +15,12 @@ async function bootstrap() {
 
   // Set the view engine and the views folder
   app.setViewEngine('ejs');
+  app.set('view options', {
+    delimiter: { 
+      open: '<%',
+      close: '%>'
+    } 
+  }); // Use your custom delimiters here
   app.setBaseViewsDir(path.join(__dirname, '..', 'views'));
 
   console.log('started on port', port)
