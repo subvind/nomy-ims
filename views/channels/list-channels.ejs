@@ -1,26 +1,94 @@
 <div class="card">
   <span class="title">List Channels</span>
   <br />
+
   <div class="row">
     <div class="col s12 m6">
-      <form hx-post="/broadcast" hx-target="#new-channel-result" hx-swap="innerHTML" hx-trigger="submit">
-        <p style="margin: 0;">channel:</p>
-        <input type="text" name="channel" placeholder="bravo" required>
-        <br />
-        <br />
-        <p style="margin: 0;">rotor settings:</p>
-        <textarea class="materialize-textarea" placeholder="['F.12', 'A.1', 'C.33', 'Z.99']" required></textarea>
-        <br />
-        <button type="submit" class="btn black btn-small">Submit</button>
-      </form>
-      <br class="hide-on-med-and-up" />
+      <div style="background: #eee; margin: 0.5em; border: 1px solid #aaa;">
+        <form 
+          hx-post="/broadcast"
+          hx-target="#new-channel-result"
+          hx-swap="innerHTML"
+          hx-trigger="submit"
+        >
+          <div class="row" style="margin: 0;">
+            <div class="input-field col s12">
+              <i class="material-icons prefix">search</i>
+              <input type="text" name="channel" placeholder="Search..." required>
+              <button type="submit" class="btn black btn-small right">find</button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
     <div class="col s12 m6">
-      <div class="result" id="new-channel-result">
-        Result will be displayed here
+      <div class="input-field col s12">
+        <p style="margin: 0;">list items by:</p>
+        <select class="browser-default">
+          <option value="" disabled selected>Choose your option</option>
+          <option value="1">recent activity</option>
+          <option value="2">date created at</option>
+          <option value="3">number of messages</option>
+          <option value="4">number of participants</option>
+        </select>
       </div>
     </div>
   </div>
+
+  <table style="overflow-x: auto;">
+    <thead style="background: #eee; border-top: 1px solid #aaa;">
+      <tr>
+        <th>Name / Description</th>
+        <th># of Messages</th>
+        <th># of Participants</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>
+          <div class="row">
+            <div class="col m2">
+              <button class="btn btn-large black right btn-floating"><i class="material-icons">markunread_mailbox</i></button>
+            </div>
+            <div class="col m10">
+              Alvin
+              <br />
+              something something something something something something something something
+              something something something something something something something something
+              something something something something something something something something
+            </div>
+          </div>
+        </td>
+        <td style="text-align: center;">11</td>
+        <td style="text-align: center;">2</td>
+      </tr>
+      <tr>
+        <td>Alan</td>
+        <td style="text-align: center;">21</td>
+        <td style="text-align: center;">6</td>
+      </tr>
+      <tr>
+        <td>Jonathan</td>
+        <td style="text-align: center;">31</td>
+        <td style="text-align: center;">4</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="right" style="padding: 1em;">
+    showing 1-10 of 55 results
+  </div>
+
+  <ul class="pagination">
+    <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+    <li class="active"><a href="#!">1</a></li>
+    <li class="waves-effect"><a href="#!">2</a></li>
+    <li class="waves-effect"><a href="#!">3</a></li>
+    <li class="waves-effect"><a href="#!">4</a></li>
+    <li class="waves-effect"><a href="#!">5</a></li>
+    <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+  </ul>
 </div>
 
 <style>

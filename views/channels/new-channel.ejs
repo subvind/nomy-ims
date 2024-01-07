@@ -4,12 +4,12 @@
   <div class="row">
     <div class="col s12 m6">
       <form hx-post="/broadcast" hx-target="#new-channel-result" hx-swap="innerHTML" hx-trigger="submit">
-        <p style="margin: 0;">channel:</p>
+        <p style="margin: 0;">name:</p>
         <input type="text" name="channel" placeholder="bravo" required>
         <br />
         <br />
-        <p style="margin: 0;">rotor settings:</p>
-        <textarea class="materialize-textarea" placeholder="['F.12', 'A.1', 'C.33', 'Z.99']" required></textarea>
+        <p style="margin: 0;">description:</p>
+        <textarea class="materialize-textarea" placeholder="we talk about bravo" required></textarea>
         <br />
         <button type="submit" class="btn black btn-small">Submit</button>
       </form>
