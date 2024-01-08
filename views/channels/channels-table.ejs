@@ -1,49 +1,36 @@
-
-<%- JSON.stringify(table, null, 2) %>
-
 <table style="overflow-x: auto;">
   <thead style="background: #eee; border-top: 1px solid #aaa;">
     <tr>
       <th>Name / Description</th>
-      <th># of Messages</th>
-      <th># of Participants</th>
+      <th style="text-align: center;"># of Messages</th>
+      <th style="text-align: center;"># of Participants</th>
     </tr>
   </thead>
 
   <tbody>
-    <tr>
-      <td>
-        <div class="row">
-          <div class="col m2">
-            <button class="btn btn-large black right btn-floating"><i class="material-icons">markunread_mailbox</i></button>
+    <% table.data.forEach((item, index) => { %>
+      <tr>
+        <td>
+          <div class="row">
+            <div class="col m2">
+              <button class="btn btn-large black right btn-floating"><i class="material-icons">markunread_mailbox</i></button>
+            </div>
+            <div class="col m10">
+              <%- item.slug %>
+              <br />
+              <%- item.description %>
+            </div>
           </div>
-          <div class="col m10">
-            Alvin
-            <br />
-            something something something something something something something something
-            something something something something something something something something
-            something something something something something something something something
-          </div>
-        </div>
-      </td>
-      <td style="text-align: center;">11</td>
-      <td style="text-align: center;">2</td>
-    </tr>
-    <tr>
-      <td>Alan</td>
-      <td style="text-align: center;">21</td>
-      <td style="text-align: center;">6</td>
-    </tr>
-    <tr>
-      <td>Jonathan</td>
-      <td style="text-align: center;">31</td>
-      <td style="text-align: center;">4</td>
-    </tr>
+        </td>
+        <td style="text-align: center;">11</td>
+        <td style="text-align: center;">2</td>
+      </tr>
+    <% }) %>
   </tbody>
 </table>
 
 <div class="right" style="padding: 1em;">
-  showing 1-10 of 55 results
+  showing 1-10 of <%- table.total %> results
 </div>
 
 <ul class="pagination">

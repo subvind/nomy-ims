@@ -16,6 +16,10 @@ export class Channel {
   @Column({ default: 'hello-world'})
   slug: string;
 
+  @ApiProperty({ example: '', description: 'A string that describes this channel' })
+  @Column({ default: 'say hello to the world.'})
+  description: string;
+
   /**
    * Other properties and relationships as needed
    */
