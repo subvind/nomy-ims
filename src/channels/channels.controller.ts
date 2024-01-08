@@ -2,7 +2,6 @@ import { Controller, Get, Render, Req, Query, Post, Body } from '@nestjs/common'
 
 import { HttpService } from '@nestjs/axios';
 import { catchError, firstValueFrom } from 'rxjs';
-import { AxiosError } from 'axios';
 
 const port = process.env.PORT || 1337
 
