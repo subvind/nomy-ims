@@ -4,10 +4,13 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import * as path from 'path';
 import * as express from 'express';
 
+import * as dotenv from 'dotenv';
 
 const port = process.env.PORT || 1337
 
 async function bootstrap() {
+  dotenv.config()
+
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   app.use(express.json());

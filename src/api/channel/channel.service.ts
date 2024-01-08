@@ -19,17 +19,12 @@ export class ChannelService {
   
     if (search) {
       query.where(
-        'channel.name LIKE :search OR channel.description LIKE :search',
+        'channel.slug LIKE :search OR channel.description LIKE :search',
         { search: `%${search}%` }
       );
     }
   
-    query.leftJoinAndSelect('channel.products', 'products');
-    query.leftJoinAndSelect('channel.organization', 'organization');
-    query.leftJoinAndSelect('channel.parentChannel', 'parentChannel');
-    query.leftJoinAndSelect('channel.subCategories', 'subCategories');
-    query.leftJoinAndSelect('channel.mainPhoto', 'mainPhoto');
-    query.leftJoinAndSelect('mainPhoto.bucket', 'mainPhotoBucket');
+    // query.leftJoinAndSelect('channel.messages', 'messages');
     
     const offset = (page - 1) * limit;
   
@@ -44,13 +39,7 @@ export class ChannelService {
         id: id
       },
       relations: [
-        'parentChannel', 
-        'subCategories', 
-        'products',
-        'organization',
-        'organization.owner',
-        'mainPhoto',
-        'mainPhoto.bucket'
+        // 'messages',
       ]
     });
   }
@@ -61,13 +50,7 @@ export class ChannelService {
         slug: slug
       },
       relations: [
-        'parentChannel', 
-        'subCategories', 
-        'products',
-        'organization',
-        'organization.owner',
-        'mainPhoto',
-        'mainPhoto.bucket'
+        // 'messages',
       ]
     });
   }

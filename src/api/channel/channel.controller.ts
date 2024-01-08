@@ -61,9 +61,14 @@ export class ChannelController {
     @Req() req: Request,
     @Body() channelData: Channel
   ): Promise<Channel> {
-    const payload = await this.channelService.create(channelData);
-    
-    return payload;
+    try {
+      const payload: any = await this.channelService.create(channelData);
+      payload.error = false;
+      return payload;
+    } catch (e) {
+      e.error = true;
+      return e
+    }
   }
 
   @ApiOperation({ summary: 'Update a channel' })
