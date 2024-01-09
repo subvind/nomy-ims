@@ -24,33 +24,6 @@
 </head>
 <body>
   <%- include('header'); %>
-  
-  <div style="text-align: center;">
-    <button 
-      hx-get="/sessions"
-      hx-target="#main-result"
-      hx-swap="innerHTML"
-      class="btn black"
-    >
-      <i class="material-icons left">person</i>sessions
-    </button>
-    <button 
-      hx-get="/channels" 
-      hx-target="#main-result" 
-      hx-swap="innerHTML" 
-      class="btn black"
-    >
-      <i class="material-icons left">markunread_mailbox</i> channels
-    </button>
-    <button 
-      hx-get="/messages" 
-      hx-target="#main-result" 
-      hx-swap="innerHTML" 
-      class="btn black"
-    >
-      <i class="material-icons left">mail</i> messages
-    </button>
-  </div>
   <br />
   <br />
   <div id="main-result" class="container">
