@@ -4,26 +4,30 @@ import { ApiProperty } from '@nestjs/swagger';
 
 import { v4 as uuidv4 } from 'uuid';
 
-import { Message } from '../message/message.entity';
-import { Contact } from '../contact/contact.entity';
+import { Session } from '../session/session.entity';
 
 @Entity()
-@Unique(['externalId']) 
-export class Session {
+@Unique(['emailAddress'])
+@Unique(['phoneNumber'])
+export class Contact {
   @PrimaryColumn('uuid')
   id: string;
 
-  @ApiProperty({ example: '001', description: 'The id that is used to identify this session externally' })
+  @ApiProperty({ example: 'travis.burandt@gmail.com', description: 'The email address of the contact' })
   @Column()
-  externalId: string;
+  emailAddress: string;
 
-  // contact id
-  @ManyToOne(() => Contact, contact => contact.id)
-  contact: Contact;
+  @ApiProperty({ example: '2817980497', description: 'The phone number of the contact' })
+  @Column()
+  phoneNumber: string;
 
   /**
    * Other properties and relationships as needed
    */
+
+  // sessions
+  @OneToMany(() => Session, session => session.contact, { nullable: true })
+  sessions: Session[]
 
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;

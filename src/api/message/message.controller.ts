@@ -51,8 +51,16 @@ export class MessageController {
     @Req() req: Request,
     @Body() messageData: Message
   ): Promise<Message> {
-    const payload = await this.messageService.create(messageData);
+    let payload: any;
     
+    try {
+      payload = await this.messageService.create(messageData);
+      payload.error = false;
+    } catch (e) {
+      payload = e
+      payload.error = true;
+    }
+
     return payload;
   }
 

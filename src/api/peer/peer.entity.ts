@@ -4,16 +4,17 @@ import { ApiProperty } from '@nestjs/swagger';
 
 import { v4 as uuidv4 } from 'uuid';
 
-import { Message } from '../message/message.entity';
+import { Channel } from '../channel/channel.entity';
 import { Contact } from '../contact/contact.entity';
+import { Tenant } from '../tenant/tenant.entity';
 
 @Entity()
 @Unique(['externalId']) 
-export class Session {
+export class Peer {
   @PrimaryColumn('uuid')
   id: string;
 
-  @ApiProperty({ example: '001', description: 'The id that is used to identify this session externally' })
+  @ApiProperty({ example: '001', description: 'The id that is used to identify this peer externally' })
   @Column()
   externalId: string;
 
@@ -25,6 +26,14 @@ export class Session {
    * Other properties and relationships as needed
    */
 
+  // channel id
+  @ManyToOne(() => Channel, channel => channel.id)
+  channel: Channel;
+
+  // tenant id
+  @ManyToOne(() => Tenant, tenant => tenant.id)
+  tenant: Tenant;
+  
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
 

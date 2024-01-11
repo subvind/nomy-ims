@@ -1,17 +1,19 @@
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { Module, forwardRef } from '@nestjs/common';
-import { SessionsController } from './sessions.controller';
+import { HttpModule } from '@nestjs/axios';
+import { UsersController } from './users.controller';
 
 @Module({
   imports: [
     // forwardRef(() => AnalyticModule),
     // OrganizationModule,
+    HttpModule
   ],
   exports: [
     
   ],
-  controllers: [SessionsController],
+  controllers: [UsersController],
   providers: [],
 })
-export class SessionsModule {}
+export class UsersModule {}

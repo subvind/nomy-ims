@@ -25,5 +25,26 @@
 <body>
   <nav></nav>
   <p>im</p>
+
+  <script>
+    document.body.addEventListener('htmx:load', function (event) {
+      // check localstorage for session
+      // if session exists then allow a user to login
+      // if session does not exist then create one
+    });
+  </script>
+
+  <!-- Include htmx -->
+  <script src="https://unpkg.com/htmx.org@1.7.0/dist/htmx.js"></script>
+
+  <!-- main -->
+  <script>
+    document.addEventListener('htmx:configRequest', function (event) {
+      var token = '123'; // getJWTToken(); // Implement this function to retrieve the JWT token
+      if (token) {
+        event.detail.headers['Authorization'] = 'Bearer ' + token;
+      }
+    });
+  </script>
 </body>
 </html>

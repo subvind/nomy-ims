@@ -1,16 +1,37 @@
 import { Controller, Get, Render, Req, Res, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 
+import { HttpService } from '@nestjs/axios';
+import { catchError, firstValueFrom } from 'rxjs';
+
+const port = process.env.PORT || 1337
+
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly httpService: HttpService
+  ) {}
 
   @Get()
   @Render('index') // 'index' corresponds to the name of your view file without extension
-  getIndex() {
-    // You can add some data here if needed
+  async getIndex() {
+    const params = {
+      page: 1,
+      limit: 10,
+      search: '',
+    };
+
+    const payload = await firstValueFrom(
+      this.httpService.get(`http://localhost:${port}/api/tenants`, { params }).pipe(
+        catchError((error: any) => {
+          return Promise.reject(error.response.data);
+        })
+      )
+    );
+
     return {
-      title: 'Instant Messenger Software - nomy.IMS'
+      title: 'Instant Messenger Software - nomy.IMS',
+      tenantTable: payload.data
     };
   }
 
@@ -40,10 +61,15 @@ export class AppController {
     res.send(response);
   }
 
-
   @Get('button')
   @Render('button')
   getButton() {
+    return { layout: false };
+  }
+
+  @Get('init-session')
+  @Render('init-session')
+  initSession() {
     return { layout: false };
   }
 

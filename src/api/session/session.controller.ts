@@ -60,7 +60,15 @@ export class SessionController {
     @Req() req: Request,
     @Body() sessionData: Session
   ): Promise<Session> {
-    const payload = await this.sessionService.create(sessionData);
+    let payload: any;
+    
+    try {
+      payload = await this.sessionService.create(sessionData);
+      payload.error = false;
+    } catch (e) {
+      payload = e
+      payload.error = true;
+    }
     
     return payload;
   }

@@ -28,11 +28,12 @@
   <br />
   <div id="main-result" class="container">
     <%- include('marketing'); %>
+    <br />
+    <%- include('tenants/index', { tenantTable }); %>
   </div>
+  <br />
 
-  <br />
-  <br />
-  <br />
+  <%- include('auth/index') %>
 
   <%- include('button'); %>
   
@@ -40,5 +41,15 @@
 
   <!-- Include htmx -->
   <script src="https://unpkg.com/htmx.org@1.7.0/dist/htmx.js"></script>
+
+  <!-- main -->
+  <script>
+    document.addEventListener('htmx:configRequest', function (event) {
+      var token = '123'; // getJWTToken(); // Implement this function to retrieve the JWT token
+      if (token) {
+        event.detail.headers['Authorization'] = 'Bearer ' + token;
+      }
+    });
+  </script>
 </body>
 </html>

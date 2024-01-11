@@ -4,8 +4,9 @@ import { ApiProperty } from '@nestjs/swagger';
 
 import { v4 as uuidv4 } from 'uuid';
 
-import { Session } from '../session/session.entity';
+import { User } from '../user/user.entity';
 import { Channel } from '../channel/channel.entity';
+import { Tenant } from '../tenant/tenant.entity';
 
 @Entity()
 // @Unique(['session', 'channel'])
@@ -21,14 +22,18 @@ export class Message {
    * Other properties and relationships as needed
    */
 
-  // session id
-  @ManyToOne(() => Session, session => session.id)
-  session: Session;
+  // user id
+  @ManyToOne(() => User, user => user.id)
+  user: User;
 
   // channel id
   @ManyToOne(() => Channel, channel => channel.id)
   channel: Channel;
 
+  // tenant id
+  @ManyToOne(() => Tenant, tenant => tenant.id)
+  tenant: Tenant;
+  
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
 

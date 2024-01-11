@@ -1,20 +1,19 @@
 import { Controller, Get, Post, Patch, Delete, Body, Param, Query, UseGuards, Req } from '@nestjs/common';
 
-import { ChannelService } from './channel.service';
+import { UserService } from './user.service';
 
-import { Channel } from './channel.entity';
-import { NotFoundException } from '@nestjs/common'; // Import the NotFoundException
+import { User } from './user.entity';
 
 import { ApiTags, ApiResponse, ApiOperation, ApiBody } from '@nestjs/swagger';
 
-@ApiTags('channels')
-@Controller('api/channels')
-export class ChannelController {
+@ApiTags('users')
+@Controller('api/users')
+export class UserController {
   constructor(
-    private readonly channelService: ChannelService,
+    private readonly userService: UserService
   ) {}
 
-  @ApiOperation({ summary: 'Get all channels' })
+  @ApiOperation({ summary: 'Get all users' })
   @ApiResponse({ status: 200, description: 'Success' })
   @Get()
   async findAll(
@@ -23,48 +22,48 @@ export class ChannelController {
     @Query('limit') limit: number = 10,
     @Query('search') search?: string,
   ) {
-    const { data, total } = await this.channelService.findAll(page, limit, search);
+    const { data, total } = await this.userService.findAll(page, limit, search);
     const payload = { data, total };
     
     return payload;
   }
 
-  @ApiOperation({ summary: 'Get a channel by id' })
+  @ApiOperation({ summary: 'Get a user by id' })
   @ApiResponse({ status: 200, description: 'Success' })
   @Get(':id')
   async findOne(
     @Req() req: Request,
     @Param('id') id: string
-  ): Promise<Channel> {
-    const payload = await this.channelService.findOne(id);
+  ): Promise<User> {
+    const payload = await this.userService.findOne(id);
     
     return payload;
   }
 
-  @ApiOperation({ summary: 'Get a channel by URL slug' })
+  @ApiOperation({ summary: 'Get a user by external id' })
   @ApiResponse({ status: 200, description: 'Success' })
-  @Get('slug/:slug')
+  @Get('username/:username')
   async findSingle(
     @Req() req: Request,
-    @Param('slug') slug: string
-  ): Promise<Channel> {
-    const payload = await this.channelService.findBySlug(slug);
-
+    @Param('username') username: string,
+  ): Promise<User> {
+    const payload = await this.userService.findByUsername(username);
+    
     return payload;
   }
 
-  @ApiOperation({ summary: 'Create a channel' })
-  @ApiBody({ type: Channel })
-  @ApiResponse({ status: 201, description: 'Success', type: Channel })
+  @ApiOperation({ summary: 'Create a user' })
+  @ApiBody({ type: User })
+  @ApiResponse({ status: 201, description: 'Success', type: User })
   @Post()
   async create(
     @Req() req: Request,
-    @Body() channelData: Channel
-  ): Promise<Channel> {
+    @Body() userData: User
+  ): Promise<User> {
     let payload: any;
     
     try {
-      payload = await this.channelService.create(channelData);
+      payload = await this.userService.create(userData);
       payload.error = false;
     } catch (e) {
       payload = e
@@ -74,27 +73,27 @@ export class ChannelController {
     return payload;
   }
 
-  @ApiOperation({ summary: 'Update a channel' })
+  @ApiOperation({ summary: 'Update a user' })
   @ApiResponse({ status: 200, description: 'Success' })
   @Patch(':id')
   async update(
     @Req() req: Request,
     @Param('id') id: string,
-    @Body() updatedChannelData: Channel
-  ): Promise<Channel> {
-    const payload = await this.channelService.update(id, updatedChannelData);
-
+    @Body() updatedUserData: User
+  ): Promise<User> {
+    const payload = await this.userService.update(id, updatedUserData);
+    
     return payload;
   }
 
-  @ApiOperation({ summary: 'Delete a channel' })
+  @ApiOperation({ summary: 'Delete a user' })
   @ApiResponse({ status: 200, description: 'Success' })
   @Delete(':id')
   async remove(
     @Req() req: Request,
     @Param('id') id: string
   ): Promise<void> {
-    const payload = await this.channelService.remove(id);
+    const payload = await this.userService.remove(id);
     
     return payload;
   }

@@ -1,20 +1,20 @@
 import { Controller, Get, Post, Patch, Delete, Body, Param, Query, UseGuards, Req } from '@nestjs/common';
 
-import { ChannelService } from './channel.service';
+import { TenantService } from './tenant.service';
 
-import { Channel } from './channel.entity';
+import { Tenant } from './tenant.entity';
 import { NotFoundException } from '@nestjs/common'; // Import the NotFoundException
 
 import { ApiTags, ApiResponse, ApiOperation, ApiBody } from '@nestjs/swagger';
 
-@ApiTags('channels')
-@Controller('api/channels')
-export class ChannelController {
+@ApiTags('tenants')
+@Controller('api/tenants')
+export class TenantController {
   constructor(
-    private readonly channelService: ChannelService,
+    private readonly tenantService: TenantService,
   ) {}
 
-  @ApiOperation({ summary: 'Get all channels' })
+  @ApiOperation({ summary: 'Get all tenants' })
   @ApiResponse({ status: 200, description: 'Success' })
   @Get()
   async findAll(
@@ -23,48 +23,48 @@ export class ChannelController {
     @Query('limit') limit: number = 10,
     @Query('search') search?: string,
   ) {
-    const { data, total } = await this.channelService.findAll(page, limit, search);
+    const { data, total } = await this.tenantService.findAll(page, limit, search);
     const payload = { data, total };
     
     return payload;
   }
 
-  @ApiOperation({ summary: 'Get a channel by id' })
+  @ApiOperation({ summary: 'Get a tenant by id' })
   @ApiResponse({ status: 200, description: 'Success' })
   @Get(':id')
   async findOne(
     @Req() req: Request,
     @Param('id') id: string
-  ): Promise<Channel> {
-    const payload = await this.channelService.findOne(id);
+  ): Promise<Tenant> {
+    const payload = await this.tenantService.findOne(id);
     
     return payload;
   }
 
-  @ApiOperation({ summary: 'Get a channel by URL slug' })
+  @ApiOperation({ summary: 'Get a tenant by URL slug' })
   @ApiResponse({ status: 200, description: 'Success' })
   @Get('slug/:slug')
   async findSingle(
     @Req() req: Request,
     @Param('slug') slug: string
-  ): Promise<Channel> {
-    const payload = await this.channelService.findBySlug(slug);
+  ): Promise<Tenant> {
+    const payload = await this.tenantService.findBySlug(slug);
 
     return payload;
   }
 
-  @ApiOperation({ summary: 'Create a channel' })
-  @ApiBody({ type: Channel })
-  @ApiResponse({ status: 201, description: 'Success', type: Channel })
+  @ApiOperation({ summary: 'Create a tenant' })
+  @ApiBody({ type: Tenant })
+  @ApiResponse({ status: 201, description: 'Success', type: Tenant })
   @Post()
   async create(
     @Req() req: Request,
-    @Body() channelData: Channel
-  ): Promise<Channel> {
+    @Body() tenantData: Tenant
+  ): Promise<Tenant> {
     let payload: any;
     
     try {
-      payload = await this.channelService.create(channelData);
+      payload = await this.tenantService.create(tenantData);
       payload.error = false;
     } catch (e) {
       payload = e
@@ -74,27 +74,27 @@ export class ChannelController {
     return payload;
   }
 
-  @ApiOperation({ summary: 'Update a channel' })
+  @ApiOperation({ summary: 'Update a tenant' })
   @ApiResponse({ status: 200, description: 'Success' })
   @Patch(':id')
   async update(
     @Req() req: Request,
     @Param('id') id: string,
-    @Body() updatedChannelData: Channel
-  ): Promise<Channel> {
-    const payload = await this.channelService.update(id, updatedChannelData);
+    @Body() updatedTenantData: Tenant
+  ): Promise<Tenant> {
+    const payload = await this.tenantService.update(id, updatedTenantData);
 
     return payload;
   }
 
-  @ApiOperation({ summary: 'Delete a channel' })
+  @ApiOperation({ summary: 'Delete a tenant' })
   @ApiResponse({ status: 200, description: 'Success' })
   @Delete(':id')
   async remove(
     @Req() req: Request,
     @Param('id') id: string
   ): Promise<void> {
-    const payload = await this.channelService.remove(id);
+    const payload = await this.tenantService.remove(id);
     
     return payload;
   }

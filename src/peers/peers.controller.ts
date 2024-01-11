@@ -1,12 +1,12 @@
 import { Controller, Get, Render, Req, Res, Post } from '@nestjs/common';
 
-@Controller('sessions')
-export class SessionsController {
+@Controller('peers')
+export class PeersController {
   constructor() {}
 
   @Get()
-  @Render('sessions/index')
-  getSessions() {
+  @Render('peers/index')
+  getPeers() {
     return { layout: false };
   }
 }
