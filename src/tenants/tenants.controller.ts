@@ -16,7 +16,15 @@ export class TenantsController {
 
   @Get()
   @Render('tenants/index')
-  async getTenants() {
+  getTenants() {
+    return { 
+      layout: false
+    };
+  }
+
+  @Get('list-tenants')
+  @Render('tenants/list-tenants')
+  async listTenants() {
     const params = {
       page: 1,
       limit: 10,
@@ -35,6 +43,12 @@ export class TenantsController {
       layout: false,
       table: payload.data
     };
+  }
+
+  @Get('new-tenant')
+  @Render('tenants/new-tenant')
+  newTenant() {
+    return { layout: false };
   }
 
   @Post()
