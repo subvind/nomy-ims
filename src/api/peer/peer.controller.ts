@@ -40,18 +40,6 @@ export class PeerController {
     return payload;
   }
 
-  @ApiOperation({ summary: 'Get a peer by external id' })
-  @ApiResponse({ status: 200, description: 'Success' })
-  @Get('get/:externalId')
-  async findSingle(
-    @Req() req: Request,
-    @Param('externalId') externalId: string,
-  ): Promise<Peer> {
-    const payload = await this.peerService.findByExternalId(externalId);
-    
-    return payload;
-  }
-
   @ApiOperation({ summary: 'Create a peer' })
   @ApiBody({ type: Peer })
   @ApiResponse({ status: 201, description: 'Success', type: Peer })

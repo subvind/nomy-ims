@@ -24,7 +24,7 @@ export class ChannelService {
       );
     }
   
-    // query.leftJoinAndSelect('channel.messages', 'messages');
+    query.leftJoinAndSelect('channel.tenant', 'tenant');
     
     const offset = (page - 1) * limit;
   
@@ -39,7 +39,7 @@ export class ChannelService {
         id: id
       },
       relations: [
-        // 'messages',
+        'tenant',
       ]
     });
   }
@@ -50,7 +50,7 @@ export class ChannelService {
         slug: slug
       },
       relations: [
-        // 'messages',
+        'tenant',
       ]
     });
   }

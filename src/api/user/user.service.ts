@@ -24,7 +24,7 @@ export class UserService {
       );
     }
   
-    // query.leftJoinAndSelect('user.category', 'category');
+    query.leftJoinAndSelect('user.contact', 'contact');
     
     const offset = (page - 1) * limit;
   

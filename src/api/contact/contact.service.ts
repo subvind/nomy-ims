@@ -24,7 +24,7 @@ export class ContactService {
       );
     }
   
-    // query.leftJoinAndSelect('contact.category', 'category');
+    query.leftJoinAndSelect('contact.user', 'user');
     
     const offset = (page - 1) * limit;
   
@@ -39,7 +39,7 @@ export class ContactService {
         id: id
       },
       relations: [
-        'sessions',
+        'user',
       ]
     });
   }
@@ -50,7 +50,7 @@ export class ContactService {
         emailAddress: emailAddress
       },
       relations: [
-        'sessions',
+        'user',
       ]
     });
   }
@@ -61,7 +61,7 @@ export class ContactService {
         phoneNumber: phoneNumber
       },
       relations: [
-        'sessions',
+        'user',
       ]
     });
   }

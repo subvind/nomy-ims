@@ -1,4 +1,4 @@
-import { Entity, PrimaryColumn, Column, BeforeInsert, Unique, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
+import { Entity, PrimaryColumn, Column, BeforeInsert, Unique, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn, OneToMany, OneToOne } from 'typeorm';
 
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -8,6 +8,7 @@ import { hash } from 'bcrypt';
 
 import { Contact } from '../contact/contact.entity';
 import { Message } from '../message/message.entity';
+import { Session } from '../session/session.entity';
 
 @Entity()
 @Unique(['username']) 
@@ -28,12 +29,17 @@ export class User {
    */
 
   // contact id
-  @ManyToOne(() => Contact, contact => contact.id)
+  @OneToOne(() => Contact, { eager: true, cascade: true })
+  @JoinColumn()
   contact: Contact;
   
   // messages
   @OneToMany(() => Message, message => message.user, { nullable: true })
   messages: Message[]
+  
+  // sessions
+  @OneToMany(() => Session, session => session.user, { nullable: true })
+  sessions: Session[]
   
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
@@ -46,7 +52,7 @@ export class User {
     if (!this.id) {
       this.id = uuidv4();
     }
-    console.log('oneTimePad insert', this.id)
+    console.log('user insert', this.id)
   }
 
   @BeforeInsert()

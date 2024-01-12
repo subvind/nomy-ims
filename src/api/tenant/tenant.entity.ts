@@ -49,6 +49,6 @@ export class Tenant {
     if (!this.id) {
       this.id = uuidv4();
     }
-    console.log('category insert', this.id)
+    console.log('tenant insert', this.id)
   }
 }

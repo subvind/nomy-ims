@@ -45,6 +45,6 @@ export class Message {
     if (!this.id) {
       this.id = uuidv4();
     }
-    console.log('oneTimePad insert', this.id)
+    console.log('message insert', this.id)
   }
 }

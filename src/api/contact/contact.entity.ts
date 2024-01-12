@@ -5,6 +5,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { v4 as uuidv4 } from 'uuid';
 
 import { Session } from '../session/session.entity';
+import { User } from '../user/user.entity';
 
 @Entity()
 @Unique(['emailAddress'])
@@ -12,6 +13,10 @@ import { Session } from '../session/session.entity';
 export class Contact {
   @PrimaryColumn('uuid')
   id: string;
+
+  // Reference to the owning side entity (User)
+  // No specific relationship decorator is needed here
+  user: User;
 
   @ApiProperty({ example: 'travis.burandt@gmail.com', description: 'The email address of the contact' })
   @Column()
@@ -25,10 +30,6 @@ export class Contact {
    * Other properties and relationships as needed
    */
 
-  // sessions
-  @OneToMany(() => Session, session => session.contact, { nullable: true })
-  sessions: Session[]
-
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
 
@@ -40,6 +41,6 @@ export class Contact {
     if (!this.id) {
       this.id = uuidv4();
     }
-    console.log('oneTimePad insert', this.id)
+    console.log('contact insert', this.id)
   }
 }

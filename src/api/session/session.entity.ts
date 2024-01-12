@@ -4,22 +4,29 @@ import { ApiProperty } from '@nestjs/swagger';
 
 import { v4 as uuidv4 } from 'uuid';
 
-import { Message } from '../message/message.entity';
-import { Contact } from '../contact/contact.entity';
+import { User } from '../user/user.entity';
 
 @Entity()
-@Unique(['externalId']) 
+@Unique(['cookie'])
 export class Session {
   @PrimaryColumn('uuid')
   id: string;
 
-  @ApiProperty({ example: '001', description: 'The id that is used to identify this session externally' })
+  @ApiProperty({ example: 'ab132f38-7667-4be9-a2af-4c5d3ec0bff1', description: 'The ip address of the session' })
   @Column()
-  externalId: string;
+  cookie: string; // uuid generated client side kept in localstorage
 
-  // contact id
-  @ManyToOne(() => Contact, contact => contact.id)
-  contact: Contact;
+  @ApiProperty({ example: '127.0.0.1', description: 'The ip address of the session' })
+  @Column()
+  ipAddress: string;
+
+  @ApiProperty({ example: 'chrome', description: 'The user agent of the session' })
+  @Column()
+  userAgent: string;
+
+  // user id
+  @ManyToOne(() => User, user => user.id)
+  user: User;
 
   /**
    * Other properties and relationships as needed
@@ -36,6 +43,6 @@ export class Session {
     if (!this.id) {
       this.id = uuidv4();
     }
-    console.log('oneTimePad insert', this.id)
+    console.log('session insert', this.id)
   }
 }

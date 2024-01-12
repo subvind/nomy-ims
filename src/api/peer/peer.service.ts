@@ -24,7 +24,8 @@ export class PeerService {
       );
     }
   
-    // query.leftJoinAndSelect('peer.category', 'category');
+    query.leftJoinAndSelect('peer.user', 'user');
+    query.leftJoinAndSelect('peer.tenant', 'tenant');
     
     const offset = (page - 1) * limit;
   
@@ -39,18 +40,8 @@ export class PeerService {
         id: id
       },
       relations: [
-        // 'category',
-      ]
-    });
-  }
-
-  async findByExternalId(externalId: string): Promise<Peer> {
-    return this.peerRepository.findOne({ 
-      where: {
-        externalId: externalId
-      },
-      relations: [
-        // 'category',
+        'user',
+        'tenant'
       ]
     });
   }

@@ -3,8 +3,11 @@ import { Controller, Get, Render, Req, Query, Post, Body } from '@nestjs/common'
 import { HttpService } from '@nestjs/axios';
 import { catchError, firstValueFrom } from 'rxjs';
 
+import { ApiTags, ApiResponse, ApiOperation, ApiBody } from '@nestjs/swagger';
+
 const port = process.env.PORT || 1337
 
+@ApiTags('tenants')
 @Controller('tenants')
 export class TenantsController {
   constructor(

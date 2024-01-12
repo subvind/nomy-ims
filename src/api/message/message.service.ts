@@ -25,7 +25,9 @@ export class MessageService {
       );
     }
   
-    query.leftJoinAndSelect('message.session', 'session');
+    query.leftJoinAndSelect('message.user', 'user');
+    query.leftJoinAndSelect('message.channel', 'channel');
+    query.leftJoinAndSelect('message.tenant', 'tenant');
     
     const offset = (page - 1) * limit;
   
@@ -40,7 +42,9 @@ export class MessageService {
         id: id
       },
       relations: [
-        'session',
+        'user',
+        'channel',
+        'tenant'
       ]
     });
   }
@@ -74,7 +78,9 @@ export class MessageService {
       );
     }
     
-    query.leftJoinAndSelect('message.session', 'session');
+    query.leftJoinAndSelect('message.user', 'user');
+    query.leftJoinAndSelect('message.channel', 'channel');
+    query.leftJoinAndSelect('message.tenant', 'tenant');
   
     const offset = (page - 1) * limit;
     
