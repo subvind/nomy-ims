@@ -1,0 +1,50 @@
+<div class="card">
+  <span class="title">Channel Flow</span>
+  <br />
+  <div class="row">
+    <div class="col s12">
+      <h5 style="margin: 0;">Channels may have many Peers and many Messages. They belong to a Tenant so that will need to be configured first. Configuring a single or many Channels for your Community is a requirment before getting started with sending messages.</h5>
+      <br />
+      <p style="margin: 0;">Get started with Channels by</p>
+      <button
+        hx-get="/channels/new-channel"
+        hx-target="#channel-result"
+        hx-swap="innerHTML"
+        class="btn btn-large black"
+      >
+        <i class="material-icons left">create</i>Creating
+      </button>
+      <button
+        hx-get="/channels/list-channels"
+        hx-target="#channel-result"
+        hx-swap="innerHTML"
+        class="btn btn-large black"
+      >
+        <i class="material-icons left">list</i>Listing
+      </button>
+      <br />
+      <p style="margin: 0;">channel records for this tenant.</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .result {
+    border: 5px dashed #eee;
+    padding: 1em;
+  }
+  .title {
+    border: 1px solid #000;
+    font-size: 1.5em;
+    position: absolute; 
+    top: -0.8em; 
+    left: 0.5em; 
+    background-color: #aaa;
+    padding: 0 0.5em;
+  }
+  .card {
+    border: 1px solid #000;
+    position: relative;
+    background: #fff;
+  }
+</style>

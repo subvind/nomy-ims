@@ -17,6 +17,14 @@ export class ChannelsController {
   @Get()
   @Render('channels/index')
   async getChannels() {
+    return { 
+      layout: false
+    };
+  }
+
+  @Get('list-channels')
+  @Render('channels/list-channels')
+  async listChannels() {
     const params = {
       page: 1,
       limit: 10,
@@ -35,6 +43,12 @@ export class ChannelsController {
       layout: false,
       table: payload.data
     };
+  }
+
+  @Get('new-channel')
+  @Render('channels/new-channel')
+  newChannel() {
+    return { layout: false };
   }
 
   @Post()
