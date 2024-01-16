@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import { HttpService } from '@nestjs/axios';
 import { catchError, firstValueFrom } from 'rxjs';
 
-const port = process.env.PORT || 1337
+const port = process.env.PORT || 3000
 
 @Controller()
 export class AppController {

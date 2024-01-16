@@ -6,7 +6,7 @@ import * as express from 'express';
 import * as dotenv from 'dotenv';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
-const port = process.env.PORT || 1337
+const port = process.env.PORT || 3000
 
 async function bootstrap() {
   dotenv.config()
