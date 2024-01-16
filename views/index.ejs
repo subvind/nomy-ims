@@ -3,6 +3,15 @@
 <%- include('head', { title }); %>
 <body>
   <%- include('header'); %>
+  <%- include('navigation'); %>
+  <%- include('breadcrumb', {
+    links: [
+      { name: `IMS`, url: `/` },
+      { name: `Homepage`, url: `/` },
+      { name: `Get`, url: `/` },
+    ]
+  }); %>
+
   <br />
   <br />
   <div id="main-result" class="container">

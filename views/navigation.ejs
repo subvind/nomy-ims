@@ -1,0 +1,50 @@
+<div class="banner">
+  <br />
+  
+  <div class="container">
+    <h1 style="margin: 0;">
+      IMS module <br /> for communities
+    </h1>
+    <br />
+    <h4 style="margin: 0;">
+      Easily host a peer 2 peer chat service. Instantly accept and receive personal messages over websockets and via notifications when offline. No code needed.
+    </h4>
+    <br />
+    <p style="margin: 0;">IMS is a system that optimizes the flow of</p>
+    <button 
+      hx-get="/peers"
+      hx-target="#main-result"
+      hx-swap="innerHTML"
+      class="btn black btn-large waves-effect waves-light"
+    >
+      <i class="material-icons left">person</i>peers
+    </button>
+    <button 
+      hx-get="/channels" 
+      hx-target="#main-result" 
+      hx-swap="innerHTML" 
+      class="btn black btn-large waves-effect waves-light"
+    >
+      <i class="material-icons left">markunread_mailbox</i> channels
+    </button>
+    <button 
+      hx-get="/messages" 
+      hx-target="#main-result" 
+      hx-swap="innerHTML" 
+      class="btn black btn-large waves-effect waves-light"
+    >
+      <i class="material-icons left">mail</i> messages
+    </button>
+    <p style="margin: 0;">within a community.</p>
+  </div>
+  <br />
+  <hr style="margin-bottom: 0; border-bottom: 0;">
+</div>
+
+<style>
+  .banner {
+    /* https://heropatterns.com/ */
+    background-color: #cccccc;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='hexagons' fill='%23bbbbbb' fill-opacity='1' fill-rule='nonzero'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+</style>
