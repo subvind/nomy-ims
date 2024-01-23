@@ -69,10 +69,10 @@
     async function getSessionFromServer(value) {
       let endpoint;
       if (window.location.hostname === 'localhost') {
-        endpoint = `http://localhost:1337/api/sessions/cookie`;
+        endpoint = `http://localhost:1337/api/sessions/cookie/${value}`;
       } else {
         let names = window.location.hostname.split('.').reverse()
-        endpoint = `https://${names[1]}.${names[0]}/api/sessions/cookie`;
+        endpoint = `https://${names[1]}.${names[0]}/api/sessions/cookie/${value}`;
       }
 
       return await fetch(endpoint, {
