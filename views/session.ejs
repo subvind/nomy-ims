@@ -1,0 +1,108 @@
+<script>
+  (async () => {
+    function generateRandomString(length) {
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let result = '';
+
+      for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        result += characters.charAt(randomIndex);
+      }
+
+      return result;
+    }
+
+    // Parse the cookies into an object
+    function parseCookies(cookieString) {
+      return cookieString.split(';').reduce((cookies, cookie) => {
+        const [name, value] = cookie.trim().split('=');
+        cookies[name] = value;
+        return cookies;
+      }, {});
+    }
+
+    function makeCookie() {
+      const cookie = generateRandomString(32);
+
+      // Set a cookie with domain attribute on getnomy.com
+      let names = window.location.hostname.split('.').reverse()
+      document.cookie = `cookie=${cookie}; domain=.${names[1]}.${names[0]}; path=/`;
+
+      console.log('make cookie', cookie);
+      return cookie;
+    }
+
+    function getCookie() {
+      // Get a specific cookie value by name
+      const cookie = parseCookies(document.cookie)['cookie'];
+
+      return cookie;
+    }
+
+    async function setSessionToServer(value) {
+      let endpoint;
+      if (window.location.hostname === 'localhost') {
+        endpoint = `http://localhost:1337/api/sessions`;
+      } else {
+        let names = window.location.hostname.split('.').reverse()
+        endpoint = `https://${names[1]}.${names[0]}/api/sessions`;
+      }
+
+      return await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          cookie: value
+        }),
+      })
+        .then(response => response.json())
+        .then(data => {
+          return data;
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
+    }
+
+    async function getSessionFromServer(value) {
+      let endpoint;
+      if (window.location.hostname === 'localhost') {
+        endpoint = `http://localhost:1337/api/sessions/cookie`;
+      } else {
+        let names = window.location.hostname.split('.').reverse()
+        endpoint = `https://${names[1]}.${names[0]}/api/sessions/cookie`;
+      }
+
+      return await fetch(endpoint, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+        .then(response => response.json())
+        .then(data => {
+          return data;
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
+    }
+
+    var cookie = getCookie();
+    var session = null;
+    console.log('cookie from localstorage', cookie)
+
+    if (cookie) {
+      session = await getSessionFromServer(cookie);
+    } else {
+      cookie = makeCookie();
+      session = await setSessionToServer(cookie);
+    }
+
+    console.log('session from server', session);
+    localStorage.setItem('session', JSON.stringify(session, null, 2));
+    handleSessionChange({ key: 'session' });
+  })();
+</script>
