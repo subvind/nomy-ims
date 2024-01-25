@@ -15,23 +15,8 @@ export class AppController {
   @Get()
   @Render('index') // 'index' corresponds to the name of your view file without extension
   async getIndex() {
-    const params = {
-      page: 1,
-      limit: 10,
-      search: '',
-    };
-
-    const payload = await firstValueFrom(
-      this.httpService.get(`http://localhost:${port}/api/tenants`, { params }).pipe(
-        catchError((error: any) => {
-          return Promise.reject(error.response.data);
-        })
-      )
-    );
-
     return {
       title: 'Instant Messenger Software - nomy.IMS',
-      tenantTable: payload.data
     };
   }
 
